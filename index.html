@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preshy's Kitchen - Taste the Love</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* NAVIGATION */
+        nav {
+            background: #1a1a2e;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: #ff6b00;
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        /* HERO */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .btn {
+            background: #ff6b00;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover { transform: scale(1.05); }
+        
+        /* SPECIALS */
+        .specials {
+            padding: 5rem 2rem;
+            background: #f9f9f9;
+            text-align: center;
+        }
+        
+        .specials h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a1a2e;
+        }
+        
+        .specials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .special-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .special-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .special-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a2e;
+        }
+        
+        .special-card p {
+            color: #666;
+        }
+        
+        /* MENU */
+        .menu-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .menu-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a1a2e;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .menu-item:hover { transform: translateY(-5px); }
+        
+        .menu-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+        
+        .menu-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu-item p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .price-tag {
+            color: #ff6b00;
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+        
+        /* ABOUT */
+        .about-section {
+            background: #1a1a2e;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .about-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-section p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+        
+        /* CONTACT */
+        .contact-section {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: #f9f9f9;
+        }
+        
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1a1a2e;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .contact-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            min-width: 250px;
+        }
+        
+        .contact-box .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-box h3 {
+            margin-bottom: 0.5rem;
+            color: #1a1a2e;
+        }
+        
+        /* FOOTER */
+        footer {
+            background: #111;
+            color: #888;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .nav-links { display: none; }
+            .contact-info { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">🍳 Preshy's Kitchen</div>
+        <div class="nav-links">
+            <a href="#menu">Menu</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Welcome to Preshy's Kitchen</h1>
+        <p>Where every meal is made with love. Experience the best of local and continental dishes, freshly prepared just for you.</p>
+        <a href="#menu" class="btn">Order Now</a>
+    </section>
+
+    <section class="specials">
+        <h2>Why Choose Us?</h2>
+        <div class="specials-grid">
+            <div class="special-card">
+                <div class="icon">🥗</div>
+                <h3>Fresh Ingredients</h3>
+                <p>We source only the freshest local ingredients for every dish.</p>
+            </div>
+            <div class="special-card">
+                <div class="icon">👨‍🍳</div>
+                <h3>Expert Chefs</h3>
+                <p>Our chefs have 10+ years of experience in Nigerian and continental cuisine.</p>
+            </div>
+            <div class="special-card">
+                <div class="icon">🚚</div>
+                <h3>Fast Delivery</h3>
+                <p>Hot meals delivered to your doorstep in 30 minutes or less.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" alt="Pizza">
+                <div class="menu-item-content">
+                    <h3>Special Preshy Pizza</h3>
+                    <p>Loaded with pepperoni, mushrooms, olives, and extra cheese</p>
+                    <p class="price-tag">₦5,500</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400" alt="Jollof">
+                <div class="menu-item-content">
+                    <h3>Party Jollof Rice</h3>
+                    <p>Smoky Nigerian jollof with grilled chicken and plantain</p>
+                    <p class="price-tag">₦3,500</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" alt="Salad">
+                <div class="menu-item-content">
+                    <h3>Fresh Garden Salad</h3>
+                    <p>Mixed greens, cherry tomatoes, cucumber, and feta cheese</p>
+                    <p class="price-tag">₦2,800</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400" alt="Chicken">
+                <div class="menu-item-content">
+                    <h3>Grilled Chicken Wings</h3>
+                    <p>Spicy marinated wings with our secret Preshy sauce</p>
+                    <p class="price-tag">₦4,000</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400" alt="Cake">
+                <div class="menu-item-content">
+                    <h3>Chocolate Fudge Cake</h3>
+                    <p>Rich, moist cake with chocolate ganache and vanilla ice cream</p>
+                    <p class="price-tag">₦2,500</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=400" alt="Smoothie">
+                <div class="menu-item-content">
+                    <h3>Tropical Smoothie</h3>
+                    <p>Fresh mango, pineapple, and banana blend</p>
+                    <p class="price-tag">₦1,800</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <h2>Our Story</h2>
+        <p>Preshy's Kitchen started in 2022 with a simple mission: to bring delicious, home-style cooking to every table. What began as a small family kitchen has grown into a beloved local restaurant. Every recipe is passed down through generations, perfected with love, and served with a smile. We believe good food brings people together.</p>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-info">
+            <div class="contact-box">
+                <div class="icon">📍</div>
+                <h3>Visit Us</h3>
+                <p>12 Admiralty Way, Lekki Phase 1, Lagos</p>
+            </div>
+            <div class="contact-box">
+                <div class="icon">📞</div>
+                <h3>Call Us</h3>
+                <p>+234 810 976 3849</p>
+            </div>
+            <div class="contact-box">
+                <div class="icon">⏰</div>
+                <h3>Open Hours</h3>
+                <p>Mon - Sun: 8AM - 10PM</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Preshy's Kitchen. Made with ❤️ by Scar</p>
+    </footer>
+
+</body>
+</html>
