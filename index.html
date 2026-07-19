@@ -1,386 +1,1029 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preshy's Kitchen - Taste the Love</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        /* NAVIGATION */
-        nav {
-            background: #1a1a2e;
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            color: #ff6b00;
-            font-size: 1.5rem;
-            font-weight: 900;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-        
-        /* HERO */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 2rem;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-        
-        .btn {
-            background: #ff6b00;
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: transform 0.3s;
-        }
-        
-        .btn:hover { transform: scale(1.05); }
-        
-        /* SPECIALS */
-        .specials {
-            padding: 5rem 2rem;
-            background: #f9f9f9;
-            text-align: center;
-        }
-        
-        .specials h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #1a1a2e;
-        }
-        
-        .specials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .special-card {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        
-        .special-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .special-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #1a1a2e;
-        }
-        
-        .special-card p {
-            color: #666;
-        }
-        
-        /* MENU */
-        .menu-section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .menu-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #1a1a2e;
-        }
-        
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .menu-item {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        
-        .menu-item:hover { transform: translateY(-5px); }
-        
-        .menu-item img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-        
-        .menu-item-content {
-            padding: 1.5rem;
-        }
-        
-        .menu-item h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .menu-item p {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-        
-        .price-tag {
-            color: #ff6b00;
-            font-size: 1.3rem;
-            font-weight: 900;
-        }
-        
-        /* ABOUT */
-        .about-section {
-            background: #1a1a2e;
-            color: white;
-            padding: 5rem 2rem;
-            text-align: center;
-        }
-        
-        .about-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .about-section p {
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #ccc;
-        }
-        
-        /* CONTACT */
-        .contact-section {
-            padding: 5rem 2rem;
-            text-align: center;
-            background: #f9f9f9;
-        }
-        
-        .contact-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #1a1a2e;
-        }
-        
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        
-        .contact-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            min-width: 250px;
-        }
-        
-        .contact-box .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .contact-box h3 {
-            margin-bottom: 0.5rem;
-            color: #1a1a2e;
-        }
-        
-        /* FOOTER */
-        footer {
-            background: #111;
-            color: #888;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        /* MOBILE */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1rem; }
-            .nav-links { display: none; }
-            .contact-info { flex-direction: column; align-items: center; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Preshy's Kitchen - Order Online</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #D4B87A;
+      --gold-dark: #B8985E;
+      --dark: #1A1A2E;
+      --gray: #6B7280;
+      --light-gray: #F3F4F6;
+      --white: #FFFFFF;
+      --green: #25D366;
+      --green-dark: #1DA851;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--light-gray);
+      color: var(--dark);
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+    
+    /* Header */
+    .header {
+      background: var(--white);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+    }
+    
+    .logo-text {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.5px;
+    }
+    
+    .logo-text span {
+      color: var(--gold);
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: var(--light-gray);
+      border-radius: 20px;
+      padding: 8px 14px;
+      gap: 6px;
+      width: 200px;
+    }
+    
+    .search-bar input {
+      border: none;
+      background: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 13px;
+      width: 100%;
+      color: var(--dark);
+    }
+    
+    .search-bar input::placeholder { color: var(--gray); }
+    
+    .cart-btn {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 22px;
+      padding: 4px;
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -6px;
+      background: #E74C3C;
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, #2D2D44 100%);
+      padding: 40px 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    
+    .hero h1 span { color: var(--gold); }
+    
+    .hero p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      max-width: 400px;
+      margin: 0 auto 20px;
+    }
+    
+    .delivery-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 10px 18px;
+      border-radius: 14px;
+    }
+    
+    .delivery-info-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+    }
+    
+    .delivery-info-item strong { color: white; }
+    
+    /* Categories */
+    .categories {
+      padding: 20px 16px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      background: var(--white);
+      border-bottom: 1px solid #E5E7EB;
+    }
+    
+    .categories::-webkit-scrollbar { display: none; }
+    
+    .category-btn {
+      padding: 8px 16px;
+      border: 2px solid #E5E7EB;
+      background: var(--white);
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+    }
+    
+    .category-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    
+    .category-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: white;
+    }
+    
+    /* Menu Grid */
+    .menu-section {
+      padding: 20px 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    @media (min-width: 768px) {
+      .menu-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    }
+    
+    .food-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+    
+    .food-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    
+    .food-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .food-info { padding: 12px; }
+    
+    .food-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+    
+    .food-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+    
+    .stars { color: #F5A623; }
+    
+    .food-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .food-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    .add-btn {
+      background: var(--gold);
+      color: white;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .add-btn:hover { background: var(--gold-dark); transform: scale(1.1); }
+    .add-btn.added { background: var(--green); }
+    
+    /* Bottom Sheet Cart */
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .cart-overlay.open { opacity: 1; visibility: visible; }
+    
+    .cart-sheet {
+      position: fixed;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      max-height: 85vh;
+      background: var(--white);
+      z-index: 201;
+      border-radius: 24px 24px 0 0;
+      transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .cart-sheet.open { bottom: 0; }
+    
+    .cart-header {
+      padding: 20px 20px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #F0F0F0;
+    }
+    
+    .cart-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .close-cart {
+      background: var(--light-gray);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 20px;
+    }
+    
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      padding: 16px 0;
+      border-bottom: 1px solid #F0F0F0;
+    }
+    
+    .cart-item-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    
+    .cart-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .cart-item-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .cart-item-price {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+    
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid #E5E7EB;
+      background: var(--white);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      transition: all 0.2s;
+    }
+    
+    .qty-btn:hover { background: var(--light-gray); }
+    
+    .qty-value {
+      font-weight: 600;
+      font-size: 15px;
+      min-width: 20px;
+      text-align: center;
+    }
+    
+    .remove-link {
+      color: var(--gray);
+      font-size: 13px;
+      text-decoration: none;
+      margin-left: auto;
+      cursor: pointer;
+    }
+    
+    .remove-link:hover { color: #E74C3C; }
+    
+    .cart-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray);
+    }
+    
+    .cart-empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.4;
+    }
+    
+    .cart-footer {
+      padding: 16px 20px 24px;
+      border-top: 1px solid #F0F0F0;
+      background: var(--white);
+    }
+    
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+    
+    .cart-total span:first-child { color: var(--gray); }
+    .cart-total span:last-child {
+      font-weight: 700;
+      color: var(--dark);
+      font-size: 20px;
+    }
+    
+    .checkout-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--gold);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .checkout-btn:hover { background: var(--gold-dark); }
+    
+    /* Checkout Form */
+    .checkout-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 300;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .checkout-overlay.open { opacity: 1; visibility: visible; }
+    
+    .checkout-sheet {
+      position: fixed;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      max-height: 90vh;
+      background: var(--white);
+      z-index: 301;
+      border-radius: 24px 24px 0 0;
+      transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .checkout-sheet.open { bottom: 0; }
+    
+    .checkout-header {
+      padding: 20px 20px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #F0F0F0;
+    }
+    
+    .checkout-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .close-checkout {
+      background: var(--light-gray);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .checkout-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    
+    .form-group label .required { color: #E74C3C; }
+    
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border: none;
+      background: var(--light-gray);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--dark);
+      outline: none;
+      transition: all 0.2s;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus {
+      background: #E8E8ED;
+    }
+    
+    .form-group input::placeholder { color: #A0A0A0; }
+    
+    .form-group select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    
+    .whatsapp-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    
+    .whatsapp-btn:hover { background: var(--green-dark); }
+    
+    .whatsapp-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+    
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--dark);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 400;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+    
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    
+    /* Desktop */
+    @media (min-width: 768px) {
+      .cart-sheet, .checkout-sheet {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+        width: 100%;
+      }
+      .cart-sheet.open, .checkout-sheet.open {
+        bottom: 0;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">🍳 Preshy's Kitchen</div>
-        <div class="nav-links">
-            <a href="#menu">Menu</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">🍽️</div>
+      <div class="logo-text">Preshy's <span>Kitchen</span></div>
+    </div>
+    <div class="header-right">
+      <div class="search-bar">
+        <span>🔍</span>
+        <input type="text" placeholder="Search dishes..." id="searchInput">
+      </div>
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Welcome to <span>Preshy's Kitchen</span></h1>
+    <p>Fresh, flavorful, and made with love. Order your favorites and we'll deliver happiness to your door.</p>
+    <div class="delivery-info">
+      <div class="delivery-info-item">
+        <span>⏱️</span>
+        <span><strong>25-40</strong> min</span>
+      </div>
+      <div class="delivery-info-item">
+        <span>⭐</span>
+        <span><strong>4.8</strong> (2,340)</span>
+      </div>
+      <div class="delivery-info-item">
+        <span>🚚</span>
+        <span><strong>Free</strong> over ₦10k</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <div class="categories" id="categories">
+    <button class="category-btn active" onclick="filterCategory('all', this)">All</button>
+    <button class="category-btn" onclick="filterCategory('burgers', this)">🍔 Burgers</button>
+    <button class="category-btn" onclick="filterCategory('pizza', this)">🍕 Pizza</button>
+    <button class="category-btn" onclick="filterCategory('sides', this)">🍟 Sides</button>
+    <button class="category-btn" onclick="filterCategory('desserts', this)">🍰 Desserts</button>
+    <button class="category-btn" onclick="filterCategory('drinks', this)">🥤 Drinks</button>
+  </div>
+
+  <!-- Menu -->
+  <section class="menu-section">
+    <h2 class="section-title">🔥 Popular Now</h2>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+
+  <!-- Cart Bottom Sheet -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  
+  <div class="cart-sheet" id="cartSheet">
+    <div class="cart-header">
+      <h2>🛒 Shopping Cart (<span id="cartHeaderCount">0</span>)</h2>
+      <button class="close-cart" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Your cart is empty</p>
+        <p style="font-size: 13px; margin-top: 8px;">Add some delicious items!</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">₦0</span>
+      </div>
+      <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Checkout Bottom Sheet -->
+  <div class="checkout-overlay" id="checkoutOverlay" onclick="closeCheckout()"></div>
+  
+  <div class="checkout-sheet" id="checkoutSheet">
+    <div class="checkout-header">
+      <h2>🛒 Shopping Cart (<span id="checkoutHeaderCount">0</span>)</h2>
+      <button class="close-checkout" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="checkout-body">
+      <!-- Cart summary in checkout -->
+      <div id="checkoutCartSummary" style="margin-bottom: 20px;"></div>
+      
+      <div class="cart-total" style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #F0F0F0;">
+        <span>Total:</span>
+        <span id="checkoutTotal">₦0</span>
+      </div>
+      
+      <button class="checkout-btn" onclick="closeCheckout(); toggleCart();" style="margin-bottom: 20px;">Back to Cart</button>
+      
+      <div class="form-group">
+        <label>Full Name <span class="required">*</span></label>
+        <input type="text" id="fullName" placeholder="Your name">
+      </div>
+      
+      <div class="form-group">
+        <label>Phone Number <span class="required">*</span></label>
+        <input type="tel" id="phoneNumber" placeholder="Your phone">
+      </div>
+      
+      <div class="form-group">
+        <label>Country <span class="required">*</span></label>
+        <select id="country">
+          <option value="Nigeria" selected>Nigeria</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Kenya">Kenya</option>
+          <option value="South Africa">South Africa</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="United States">United States</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Delivery Address <span class="required">*</span></label>
+        <input type="text" id="deliveryAddress" placeholder="Your location">
+      </div>
+      
+      <button class="whatsapp-btn" onclick="orderViaWhatsApp()">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order via WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">✅ Added to cart!</div>
+
+  <script>
+    const menuItems = [
+      { id: 1, name: "Classic Cheeseburger", desc: "Juicy beef patty with melted cheddar, fresh lettuce, tomato, and our secret sauce on a toasted brioche bun.", price: 10500, category: "burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop", rating: 4.9, reviews: "2.2k", sold: "15.4k" },
+      { id: 2, name: "BBQ Bacon Burger", desc: "Smoky BBQ sauce, crispy bacon, onion rings, and cheddar cheese. A flavor explosion in every bite!", price: 12500, category: "burgers", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop", rating: 4.7, reviews: "892", sold: "6.2k" },
+      { id: 3, name: "Spicy Chicken Burger", desc: "Crispy fried chicken with spicy mayo, pickles, and coleslaw. Not for the faint of heart!", price: 11500, category: "burgers", img: "https://images.unsplash.com/photo-1606755962773-d324e0a52c27?w=400&h=300&fit=crop", rating: 4.8, reviews: "1.5k", sold: "9.1k" },
+      { id: 4, name: "Margherita Pizza", desc: "Fresh mozzarella, San Marzano tomatoes, and basil on our hand-stretched dough. Simple perfection.", price: 14000, category: "pizza", img: "https://images.unsplash.com/photo-1574071318508-1cdbab80d2e4?w=400&h=300&fit=crop", rating: 4.9, reviews: "3.1k", sold: "12.8k" },
+      { id: 5, name: "Pepperoni Feast", desc: "Loaded with premium pepperoni, mozzarella, and our signature tomato sauce. A crowd favorite!", price: 16000, category: "pizza", img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=300&fit=crop", rating: 4.7, reviews: "2.8k", sold: "11.2k" },
+      { id: 6, name: "BBQ Chicken Pizza", desc: "Grilled chicken, red onions, cilantro, and tangy BBQ sauce. A sweet and savory masterpiece.", price: 17000, category: "pizza", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop", rating: 4.6, reviews: "1.2k", sold: "7.5k" },
+      { id: 7, name: "Truffle Fries", desc: "Crispy golden fries tossed in truffle oil, parmesan, and fresh herbs. Absolutely addictive.", price: 5500, category: "sides", img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop", rating: 4.8, reviews: "3.5k", sold: "18.2k" },
+      { id: 8, name: "Onion Rings", desc: "Thick-cut onions in a light, crispy batter. Served with our house-made ranch dipping sauce.", price: 4500, category: "sides", img: "https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&h=300&fit=crop", rating: 4.5, reviews: "980", sold: "5.1k" },
+      { id: 9, name: "Loaded Nachos", desc: "Tortilla chips piled high with cheese, jalapeños, salsa, guacamole, and sour cream. Shareable bliss.", price: 8500, category: "sides", img: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop", rating: 4.7, reviews: "1.8k", sold: "8.9k" },
+      { id: 10, name: "Chocolate Lava Cake", desc: "Warm chocolate cake with a molten center, served with vanilla ice cream. Pure indulgence.", price: 6500, category: "desserts", img: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400&h=300&fit=crop", rating: 4.9, reviews: "4.2k", sold: "22.1k" },
+      { id: 11, name: "New York Cheesecake", desc: "Creamy, rich cheesecake with a graham cracker crust and strawberry compote topping.", price: 5500, category: "desserts", img: "https://images.unsplash.com/photo-1524351199678-941a58a3df50?w=400&h=300&fit=crop", rating: 4.8, reviews: "2.1k", sold: "10.5k" },
+      { id: 12, name: "Fresh Lemonade", desc: "Hand-squeezed lemons with just the right amount of sweetness. Refreshingly tart and sweet.", price: 2500, category: "drinks", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&h=300&fit=crop", rating: 4.6, reviews: "1.5k", sold: "9.8k" },
+      { id: 13, name: "Iced Caramel Latte", desc: "Espresso with caramel and cold milk over ice. The perfect pick-me-up any time of day.", price: 3500, category: "drinks", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop", rating: 4.7, reviews: "2.3k", sold: "11.4k" },
+      { id: 14, name: "Mango Smoothie", desc: "Blended fresh mango, yogurt, and honey. Thick, creamy, and bursting with tropical flavor.", price: 4000, category: "drinks", img: "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&h=300&fit=crop", rating: 4.8, reviews: "1.9k", sold: "10.2k" }
+    ];
+
+    let cart = [];
+    let currentCategory = 'all';
+
+    function formatPrice(price) {
+      return '₦' + price.toLocaleString('en-NG');
+    }
+
+    function renderStars(rating) {
+      const fullStars = Math.floor(rating);
+      let stars = '';
+      for (let i = 0; i < fullStars; i++) stars += '★';
+      for (let i = fullStars; i < 5; i++) stars += '☆';
+      return stars;
+    }
+
+    function renderMenu(items) {
+      const grid = document.getElementById('menuGrid');
+      grid.innerHTML = items.map(item => `
+        <div class="food-card" data-category="${item.category}">
+          <img class="food-img" src="${item.img}" alt="${item.name}" loading="lazy">
+          <div class="food-info">
+            <div class="food-name">${item.name}</div>
+            <div class="food-rating">
+              <span class="stars">${renderStars(item.rating)}</span>
+              <span>${item.rating} (${item.reviews})</span>
+            </div>
+            <div class="food-footer">
+              <div class="food-price">${formatPrice(item.price)}</div>
+              <button class="add-btn" id="btn-${item.id}" onclick="addToCart(${item.id})">+</button>
+            </div>
+          </div>
         </div>
-    </nav>
+      `).join('');
+    }
 
-    <section class="hero">
-        <h1>Welcome to Preshy's Kitchen</h1>
-        <p>Where every meal is made with love. Experience the best of local and continental dishes, freshly prepared just for you.</p>
-        <a href="#menu" class="btn">Order Now</a>
-    </section>
+    function filterCategory(category, btn) {
+      currentCategory = category;
+      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filtered = category === 'all' ? menuItems : menuItems.filter(i => i.category === category);
+      renderMenu(filtered);
+    }
 
-    <section class="specials">
-        <h2>Why Choose Us?</h2>
-        <div class="specials-grid">
-            <div class="special-card">
-                <div class="icon">🥗</div>
-                <h3>Fresh Ingredients</h3>
-                <p>We source only the freshest local ingredients for every dish.</p>
-            </div>
-            <div class="special-card">
-                <div class="icon">👨‍🍳</div>
-                <h3>Expert Chefs</h3>
-                <p>Our chefs have 10+ years of experience in Nigerian and continental cuisine.</p>
-            </div>
-            <div class="special-card">
-                <div class="icon">🚚</div>
-                <h3>Fast Delivery</h3>
-                <p>Hot meals delivered to your doorstep in 30 minutes or less.</p>
-            </div>
-        </div>
-    </section>
+    function addToCart(id) {
+      const item = menuItems.find(i => i.id === id);
+      const existing = cart.find(i => i.id === id);
+      
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ ...item, qty: 1 });
+      }
+      
+      updateCartUI();
+      showToast(`Added ${item.name} to cart!`);
+      
+      const btn = document.getElementById(`btn-${id}`);
+      btn.classList.add('added');
+      btn.innerHTML = '✓';
+      setTimeout(() => {
+        btn.classList.remove('added');
+        btn.innerHTML = '+';
+      }, 1000);
+    }
 
-    <section class="menu-section" id="menu">
-        <h2>Our Menu</h2>
-        <div class="menu-grid">
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" alt="Pizza">
-                <div class="menu-item-content">
-                    <h3>Special Preshy Pizza</h3>
-                    <p>Loaded with pepperoni, mushrooms, olives, and extra cheese</p>
-                    <p class="price-tag">₦5,500</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400" alt="Jollof">
-                <div class="menu-item-content">
-                    <h3>Party Jollof Rice</h3>
-                    <p>Smoky Nigerian jollof with grilled chicken and plantain</p>
-                    <p class="price-tag">₦3,500</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" alt="Salad">
-                <div class="menu-item-content">
-                    <h3>Fresh Garden Salad</h3>
-                    <p>Mixed greens, cherry tomatoes, cucumber, and feta cheese</p>
-                    <p class="price-tag">₦2,800</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400" alt="Chicken">
-                <div class="menu-item-content">
-                    <h3>Grilled Chicken Wings</h3>
-                    <p>Spicy marinated wings with our secret Preshy sauce</p>
-                    <p class="price-tag">₦4,000</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400" alt="Cake">
-                <div class="menu-item-content">
-                    <h3>Chocolate Fudge Cake</h3>
-                    <p>Rich, moist cake with chocolate ganache and vanilla ice cream</p>
-                    <p class="price-tag">₦2,500</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=400" alt="Smoothie">
-                <div class="menu-item-content">
-                    <h3>Tropical Smoothie</h3>
-                    <p>Fresh mango, pineapple, and banana blend</p>
-                    <p class="price-tag">₦1,800</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    function removeFromCart(id) {
+      cart = cart.filter(i => i.id !== id);
+      updateCartUI();
+    }
 
-    <section class="about-section" id="about">
-        <h2>Our Story</h2>
-        <p>Preshy's Kitchen started in 2022 with a simple mission: to bring delicious, home-style cooking to every table. What began as a small family kitchen has grown into a beloved local restaurant. Every recipe is passed down through generations, perfected with love, and served with a smile. We believe good food brings people together.</p>
-    </section>
+    function updateQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.qty += delta;
+        if (item.qty <= 0) removeFromCart(id);
+        else updateCartUI();
+      }
+    }
 
-    <section class="contact-section" id="contact">
-        <h2>Get In Touch</h2>
-        <div class="contact-info">
-            <div class="contact-box">
-                <div class="icon">📍</div>
-                <h3>Visit Us</h3>
-                <p>12 Admiralty Way, Lekki Phase 1, Lagos</p>
+    function updateCartUI() {
+      const count = cart.reduce((sum, i) => sum + i.qty, 0);
+      document.getElementById('cartCount').textContent = count;
+      document.getElementById('cartHeaderCount').textContent = count;
+      document.getElementById('checkoutHeaderCount').textContent = count;
+      
+      const cartItems = document.getElementById('cartItems');
+      const cartFooter = document.getElementById('cartFooter');
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = `
+          <div class="cart-empty">
+            <div class="cart-empty-icon">🛒</div>
+            <p>Your cart is empty</p>
+            <p style="font-size: 13px; margin-top: 8px;">Add some delicious items!</p>
+          </div>
+        `;
+        cartFooter.style.display = 'none';
+      } else {
+        cartItems.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">${formatPrice(item.price * item.qty)}</div>
+              <div class="cart-item-controls">
+                <button class="qty-btn" onclick="updateQty(${item.id}, -1)">−</button>
+                <span class="qty-value">${item.qty}</span>
+                <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+                <span class="remove-link" onclick="removeFromCart(${item.id})">Remove</span>
+              </div>
             </div>
-            <div class="contact-box">
-                <div class="icon">📞</div>
-                <h3>Call Us</h3>
-                <p>+234 810 976 3849</p>
+          </div>
+        `).join('');
+        
+        const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+        document.getElementById('cartTotal').textContent = formatPrice(total);
+        document.getElementById('checkoutTotal').textContent = formatPrice(total);
+        cartFooter.style.display = 'block';
+        
+        // Update checkout summary
+        document.getElementById('checkoutCartSummary').innerHTML = cart.map(item => `
+          <div class="cart-item" style="padding: 8px 0;">
+            <img class="cart-item-img" src="${item.img}" alt="${item.name}" style="width:48px;height:48px;">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">${formatPrice(item.price)} x ${item.qty}</div>
             </div>
-            <div class="contact-box">
-                <div class="icon">⏰</div>
-                <h3>Open Hours</h3>
-                <p>Mon - Sun: 8AM - 10PM</p>
-            </div>
-        </div>
-    </section>
+          </div>
+        `).join('');
+      }
+    }
 
-    <footer>
-        <p>© 2026 Preshy's Kitchen. Made with ❤️ by Scar</p>
-    </footer>
+    function toggleCart() {
+      document.getElementById('cartOverlay').classList.toggle('open');
+      document.getElementById('cartSheet').classList.toggle('open');
+    }
 
+    function openCheckout() {
+      toggleCart();
+      document.getElementById('checkoutOverlay').classList.add('open');
+      document.getElementById('checkoutSheet').classList.add('open');
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkoutOverlay').classList.remove('open');
+      document.getElementById('checkoutSheet').classList.remove('open');
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function orderViaWhatsApp() {
+      const fullName = document.getElementById('fullName').value.trim();
+      const phone = document.getElementById('phoneNumber').value.trim();
+      const country = document.getElementById('country').value;
+      const address = document.getElementById('deliveryAddress').value.trim();
+      
+      if (!fullName || !phone || !address) {
+        showToast('Please fill in all required fields!');
+        return;
+      }
+      
+      const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+      
+      let message = `🍽️ *NEW ORDER - Preshy's Kitchen*\\n\\n`;
+      message += `👤 *Name:* ${fullName}\\n`;
+      message += `📞 *Phone:* ${phone}\\n`;
+      message += `🌍 *Country:* ${country}\\n`;
+      message += `📍 *Address:* ${address}\\n\\n`;
+      message += `🛒 *Order Items:*\\n`;
+      cart.forEach(item => {
+        message += `• ${item.name} x${item.qty} - ${formatPrice(item.price * item.qty)}\\n`;
+      });
+      message += `\\n💰 *Total:* ${formatPrice(total)}`;
+      
+      // Replace with your actual WhatsApp number
+      const whatsappNumber = '2348012345678';
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+      
+      showToast('Opening WhatsApp...');
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = menuItems.filter(i => 
+        i.name.toLowerCase().includes(query) || i.desc.toLowerCase().includes(query)
+      );
+      renderMenu(filtered);
+    });
+
+    // Initial render
+    renderMenu(menuItems);
+  </script>
 </body>
-</html>
+</html>'''
+
+with open('/mnt/agents/output/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_code)
+
+print("File saved successfully!")
+print(f"File size: {len(html_code)} characters")
